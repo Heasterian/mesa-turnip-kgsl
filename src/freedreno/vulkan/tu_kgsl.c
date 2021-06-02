@@ -29,6 +29,7 @@
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 
+#define __user
 #include "msm_kgsl.h"
 #include "vk_util.h"
 

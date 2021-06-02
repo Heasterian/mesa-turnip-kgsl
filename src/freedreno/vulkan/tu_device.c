@@ -174,6 +174,7 @@ get_device_extensions(const struct tu_physical_device *device,
       .EXT_shader_stencil_export = true,
       .EXT_shader_viewport_index_layer = true,
       .EXT_vertex_attribute_divisor = true,
+      
 #ifdef ANDROID
       .ANDROID_native_buffer = true,
 #endif
@@ -757,6 +758,13 @@ tu_GetPhysicalDeviceFeatures2(VkPhysicalDevice physicalDevice,
          feature->vulkanMemoryModelAvailabilityVisibilityChains = true;
          break;
       }
+      case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT: {
+         VkPhysicalDeviceProvokingVertexFeaturesEXT *features =
+            (VkPhysicalDeviceProvokingVertexFeaturesEXT *)ext;
+         features->provokingVertexLast = true;
+         features->transformFeedbackPreservesProvokingVertex = true;
+         break;
+      }
 
       default:
          break;
@@ -1076,6 +1084,14 @@ tu_GetPhysicalDeviceProperties2(VkPhysicalDevice physicalDevice,
          props->robustUniformBufferAccessSizeAlignment = 16;
          break;
       }
+      case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT: {
+         VkPhysicalDeviceProvokingVertexPropertiesEXT *properties =
+            (VkPhysicalDeviceProvokingVertexPropertiesEXT *)ext;
+         properties->provokingVertexModePerPipeline = true;
+         properties->transformFeedbackPreservesTriangleFanProvokingVertex = false;
+         break;
+      }
+
       default:
          break;
       }

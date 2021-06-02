@@ -1149,6 +1149,8 @@ struct tu_pipeline
    {
       uint32_t local_size[3];
    } compute;
+   
+   bool provoking_vertex_last;
 
    struct tu_lrz_pipeline lrz;
 
